@@ -64,6 +64,8 @@ function calculaItemLvl() {
 function onKeyUp(evt) {
   let val = evt.target.value;
 
+  val = parseInt(val);
+  evt.target.value = val;
   if (val > 25) evt.target.value = 25;
 
   let itemLvl = calculaItemLvl();
