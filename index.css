@@ -1,18 +1,36 @@
-.input {
-  display: flex;
-  width: 300px;
-  justify-content: space-between;
-  margin-bottom: 10px;
-  align-items: center;
+body {
+  width: 100vw;
 }
 
-.input input {
-    width: 200px;
-    height: 30px;
+.form-group {
+  margin-top: 1rem;
+}
+
+.form-group input,
+.form-group label {
+  width: 100%;
+  font-size: 1.1rem !important;
+}
+
+.form-group .tier {
+  width: 100px;
+  font-size: 1.1rem !important;
+  margin-right: 0.5rem;
+}
+
+.form-group .type {
+  width: 150px;
+  font-size: 1.1rem !important;
+  margin-right: 0.5rem;
 }
 
 .result {
-    margin-top: 2rem;
-    font-size: 1.4rem;
+  margin-top: 2rem;
+  font-size: 1.4rem !important;
 }
 
+#btn-setar {
+  margin-left: 0.25rem;
+  padding-left: 1.5rem!important;
+  padding-right: 1.5rem!important;
+}
