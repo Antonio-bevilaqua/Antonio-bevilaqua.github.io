@@ -4,6 +4,7 @@ function writeInputs() {
         <label><b>{titulo}</b></label>
         <div class="d-flex">
           <select class="form-control tier">
+            <option value="1" >T1</option>
             <option value="2" >T2</option>
             <option value="3" selected>T3</option>
           <select>
@@ -33,21 +34,34 @@ function writeResolution() {
     `;
 }
 
+function getItemLvT1Rare(ini, val, value) {
+  if (ini > val) return value;
+
+  if (ini === 1) return getItemLvT1Rare(ini + 1, val, value + 18);
+
+  if (ini <= 15) return getItemLvT1Rare(ini + 1, val, value + 20);
+
+  return getItemLvT1Rare(ini + 1, val, value + 25);
+}
+
 function getItemLvlT2Rare(ini, val, value) {
   if (ini > val) return value;
 
   if (ini === 1) return getItemLvlT2Rare(ini + 1, val, value + 18);
-  return getItemLvlT2Rare(ini + 1, val, value + 20);
+
+  if (ini <= 15) return getItemLvlT2Rare(ini + 1, val, value + 20);
+
+  return getItemLvlT2Rare(ini + 1, val, value + 25);
 }
 
 function getItemLvlT3Rare(ini, val, value) {
   if (ini > val) return value;
 
-  if (ini === 1) return getItemLvlT3Rare(2, val, value + 3);
+  if (ini === 1) return getItemLvlT3Rare(2, val, value + 2);
 
-  if (ini <= 6) return getItemLvlT3Rare(ini + 1, val, value + 4);
+  if (ini <= 3) return getItemLvlT3Rare(ini + 1, val, value + 3);
 
-  if (ini <= 15) return getItemLvlT3Rare(ini + 1, val, value + 5);
+  return getItemLvlT3Rare(ini + 1, val, value + 5);
 }
 
 function getItemLvlT3Legendary(ini, val, value) {
@@ -59,17 +73,9 @@ function getItemLvlT3Legendary(ini, val, value) {
 }
 
 function getItemLvl(type, tier, val, inival) {
-  if (tier === "1") {
-    if (val <= 15) {
-      return val * 5;
-    }
+  if (tier === "1") return getItemLvT1Rare(1, val, inival);
 
-    let inicio = (15 - 6) * 5;
-    return inicio + (val - 15) * 15;
-  }
-  if (tier === "2") {
-    return getItemLvlT2Rare(1, val, inival);
-  }
+  if (tier === "2") return getItemLvlT2Rare(1, val, inival);
 
   if (tier === "3") {
     if (type === "0") return getItemLvlT3Rare(1, val, inival);
@@ -86,7 +92,7 @@ function validaValor(valor) {
 }
 
 function getInitialLevelForTier(tier, type) {
-  //if (tier === "1") return 302;
+  if (tier === "1") return 302;
   if (tier === "2") return 802;
   if (tier === "3") {
     switch (type) {
@@ -96,6 +102,38 @@ function getInitialLevelForTier(tier, type) {
         return 1340;
     }
   }
+}
+
+function validateInput(input, select, type) {
+  let val = parseInt(input.value);
+  let selectVal = parseInt(select.value);
+  if (selectVal < 3 && val > 20) {
+    input.value = 20;
+    return 20;
+  }
+
+  if (selectVal === 2 && val > 20) {
+    input.value = 20;
+    return 20;
+  }
+
+  if (selectVal === 3 && type.value === "0" && val > 15) {
+    input.value = 15;
+    return 15;
+  }
+
+  if (val > 25) {
+    input.value = 25;
+    return 25;
+  }
+
+  return val;
+}
+
+function writeILvl(ilvl) {
+  document.getElementById("ilvl").innerText = isNaN(ilvl)
+    ? "Valor de refino inválido"
+    : ilvl;
 }
 
 function calculaItemLvl() {
@@ -113,9 +151,11 @@ function calculaItemLvl() {
 
     if (invalido) return;
 
-    let intVal = parseInt(ipt.value);
     const select = ipt.parentElement.querySelector(".tier");
     const type = ipt.parentElement.querySelector(".type");
+
+    let intVal = validateInput(ipt, select, type);
+
     const initial = getInitialLevelForTier(select.value, type.value);
     mediaSum += getItemLvl(type.value, select.value, intVal, initial);
     numeroElementos++;
@@ -129,12 +169,9 @@ function onKeyUp(evt) {
   val = val.replace(/\D/g, "");
   val = parseInt(val);
 
-  evt.target.value = val;
-  if (val > 25) evt.target.value = 25;
-
   let itemLvl = calculaItemLvl();
   if (!itemLvl) return true;
-  document.getElementById("ilvl").innerText = itemLvl;
+  writeILvl(itemLvl);
 }
 
 function allTierChange() {
@@ -145,8 +182,21 @@ function allTierChange() {
     ipt.value = allTier.value;
   });
 
+  let allType = document.querySelector("#all-type");
+  if (parseInt(allTier.value) < 3) {
+    allType.value = 0;
+    allType.setAttribute("disabled", "disabled");
+    allTypeChange();
+  } else {
+    let selects = document.querySelectorAll(".type");
+    [...selects].forEach((ipt) => {
+      if (ipt.hasAttribute("disabled")) ipt.removeAttribute("disabled");
+    });
+  }
+
   let itemLvl = calculaItemLvl();
-  document.getElementById("ilvl").innerText = itemLvl;
+
+  writeILvl(itemLvl);
 }
 
 function allTypeChange() {
@@ -155,10 +205,12 @@ function allTypeChange() {
 
   [...selects].forEach((ipt) => {
     ipt.value = allType.value;
+    if (allType.hasAttribute("disabled"))
+      ipt.setAttribute("disabled", "disabled");
   });
 
   let itemLvl = calculaItemLvl();
-  document.getElementById("ilvl").innerText = itemLvl;
+  writeILvl(itemLvl);
 }
 
 function allValueChange() {
@@ -170,7 +222,8 @@ function allValueChange() {
   });
 
   let itemLvl = calculaItemLvl();
-  document.getElementById("ilvl").innerText = itemLvl;
+
+  writeILvl(itemLvl);
 }
 
 window.onload = () => {
@@ -199,5 +252,5 @@ window.onload = () => {
   allType.addEventListener("change", allTypeChange);
   allValue.addEventListener("keyup", allValueChange);
 
-  document.getElementById("ilvl").innerText = itemLvl;
+  writeILvl(itemLvl);
 };
