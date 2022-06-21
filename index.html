@@ -22,22 +22,7 @@
         <div class="card-header">
           <h4 class="card-title">Seleção Geral</h4>
         </div>
-        <div class="card-body">
-          <div class="d-flex form-group">
-            <select id="all-tier" class="form-control tier">
-              <option value="1" >T1</option>
-              <option value="2" >T2</option>
-              <option value="3" selected>T3</option>
-            <select>
-            <select id="all-type" class="form-control type">
-              <option value="0" >Rare / Epic</option>
-              <option value="1" selected>Legendary +</option>
-            <select>
-            <input id="all-value" class="form-control" type="number" step="1" min="0" value="6" />
-          </div>
-          <div class="alert alert-info mt-3">  
-            <small>Mudanças aqui alteram todos os valores dos equipamentos abaixo</small>
-          </div>
+        <div id="geral" class="card-body">
         </div>
       </div>
       <br/>
@@ -51,5 +36,5 @@
       </div>
     </div>
   </body>
-  <script type="text/javascript" src="./index.js?v=1.0.2"></script>
+  <script type="module" src="./src/HoningCalculator.js?v=1.0.1"></script>
 </html>

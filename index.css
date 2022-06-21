@@ -2,6 +2,10 @@ body {
   width: 100vw;
 }
 
+.content {
+  display: flex;
+}
+
 .form-group {
   margin-top: 1rem;
 }
@@ -12,13 +16,13 @@ body {
   font-size: 1.1rem !important;
 }
 
-.form-group .tier {
+.form-group .tiers {
   width: 100px;
   font-size: 1.1rem !important;
   margin-right: 0.5rem;
 }
 
-.form-group .type {
+.form-group .types {
   width: 150px;
   font-size: 1.1rem !important;
   margin-right: 0.5rem;
