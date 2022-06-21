@@ -28,7 +28,7 @@ function writeInputs() {
 function writeResolution() {
   document.querySelector("#conteudo").innerHTML += `
     <div class="result">
-        <label>Seu ILVL:</label>
+        <label>Item Level:</label>
         <b id="ilvl"></b>
     </div>
     `;
