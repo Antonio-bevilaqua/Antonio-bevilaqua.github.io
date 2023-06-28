@@ -1,27 +1,27 @@
 {
   "files": {
-    "main.css": "./static/css/main.463bfade.chunk.css",
-    "main.js": "./static/js/main.b8d79874.chunk.js",
-    "main.js.map": "./static/js/main.b8d79874.chunk.js.map",
-    "runtime-main.js": "./static/js/runtime-main.6fdceae0.js",
-    "runtime-main.js.map": "./static/js/runtime-main.6fdceae0.js.map",
-    "static/js/2.1b21d60f.chunk.js": "./static/js/2.1b21d60f.chunk.js",
-    "static/js/2.1b21d60f.chunk.js.map": "./static/js/2.1b21d60f.chunk.js.map",
-    "static/js/3.ea9a054b.chunk.js": "./static/js/3.ea9a054b.chunk.js",
-    "static/js/3.ea9a054b.chunk.js.map": "./static/js/3.ea9a054b.chunk.js.map",
-    "index.html": "./index.html",
-    "static/css/main.463bfade.chunk.css.map": "./static/css/main.463bfade.chunk.css.map",
-    "static/js/2.1b21d60f.chunk.js.LICENSE.txt": "./static/js/2.1b21d60f.chunk.js.LICENSE.txt",
-    "static/media/index.css": "./static/media/pokeballBackground.727adbba.svg",
-    "static/media/backgroundDetailsWhite.13b0c65b.png": "./static/media/backgroundDetailsWhite.13b0c65b.png",
-    "static/media/charizard-logo.4632ab8c.gif": "./static/media/charizard-logo.4632ab8c.gif",
-    "static/media/pagepokemongif.d028ec5f.gif": "./static/media/pagepokemongif.d028ec5f.gif",
-    "static/media/pokeballBackground.5276cdbe.png": "./static/media/pokeballBackground.5276cdbe.png"
+    "main.css": "/static/css/main.6bc516a7.chunk.css",
+    "main.js": "/static/js/main.b8d79874.chunk.js",
+    "main.js.map": "/static/js/main.b8d79874.chunk.js.map",
+    "runtime-main.js": "/static/js/runtime-main.edf8f695.js",
+    "runtime-main.js.map": "/static/js/runtime-main.edf8f695.js.map",
+    "static/js/2.1b21d60f.chunk.js": "/static/js/2.1b21d60f.chunk.js",
+    "static/js/2.1b21d60f.chunk.js.map": "/static/js/2.1b21d60f.chunk.js.map",
+    "static/js/3.ea9a054b.chunk.js": "/static/js/3.ea9a054b.chunk.js",
+    "static/js/3.ea9a054b.chunk.js.map": "/static/js/3.ea9a054b.chunk.js.map",
+    "index.html": "/index.html",
+    "static/css/main.6bc516a7.chunk.css.map": "/static/css/main.6bc516a7.chunk.css.map",
+    "static/js/2.1b21d60f.chunk.js.LICENSE.txt": "/static/js/2.1b21d60f.chunk.js.LICENSE.txt",
+    "static/media/index.css": "/static/media/pokeballBackground.727adbba.svg",
+    "static/media/backgroundDetailsWhite.13b0c65b.png": "/static/media/backgroundDetailsWhite.13b0c65b.png",
+    "static/media/charizard-logo.4632ab8c.gif": "/static/media/charizard-logo.4632ab8c.gif",
+    "static/media/pagepokemongif.d028ec5f.gif": "/static/media/pagepokemongif.d028ec5f.gif",
+    "static/media/pokeballBackground.5276cdbe.png": "/static/media/pokeballBackground.5276cdbe.png"
   },
   "entrypoints": [
-    "static/js/runtime-main.6fdceae0.js",
+    "static/js/runtime-main.edf8f695.js",
     "static/js/2.1b21d60f.chunk.js",
-    "static/css/main.463bfade.chunk.css",
+    "static/css/main.6bc516a7.chunk.css",
     "static/js/main.b8d79874.chunk.js"
   ]
 }
