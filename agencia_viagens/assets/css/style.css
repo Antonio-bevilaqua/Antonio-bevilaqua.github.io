@@ -241,6 +241,7 @@ b {
   justify-content: center;
   align-items: center;
   background-color: var(--primary);
+  z-index: 99999999;
 }
 
 .fixed-header > .logo {
