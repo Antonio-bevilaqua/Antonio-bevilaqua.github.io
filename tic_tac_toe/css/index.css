@@ -6,44 +6,171 @@ body {
     width: 100%;
     height: 100dvh;
     margin: 0;
+    font-family: 'Roboto', 'Sans-serif';
+    background-color: #0f172a;
+    color: #e2e8f0;
 }
 
-.game {  
+main {
+    position: relative;
+
+    h1 {
+        width: 100%;
+        text-align: center;
+        font-size: 2rem;
+        font-weight: bold;
+    }
+
+    .options {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+
+        .button-container {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+    }
+
+    #result {
+        position: fixed;
+        top: 15%;
+        width: min(90%, 600px);
+        background-color: #1e293b;
+        left: 50%;
+        top: 0%;
+        transform: translate(-50%, -50%);
+        border-radius: 1rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
+        gap: 2rem;
+        padding: 2rem;
+        opacity: 0;
+        pointer-events: none;
+        transition: top 0.2s ease, opacity 0.2s ease;
+
+        &.show {
+            top: 50%;
+            opacity: 1;
+            pointer-events: all;
+        }
+
+        .top-result {
+            text-align: center;
+
+            .icon {
+                font-size: 6rem;
+                margin-bottom: 1rem;
+            }
+        }
+
+        .top-result.success {
+            .icon {
+                color: #86efac;
+            }
+        }
+
+        .top-result.danger {
+            .icon {
+                color: #fda4af;
+            }
+        }
+    }
+}
+
+.btn {
+    border: none;
+    border-radius: 0.5rem;
+    padding: 0.75rem 1rem;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out;
+}
+
+.btn-success {
+    border: 2px solid #15803d;
+    background-color: #15803d;
+    color: white;
+}
+
+.btn-success:hover {
+    background-color: #14532d;
+}
+
+.btn-info {
+    border: 2px solid #0891b2;
+    background-color: #0891b2;
+    color: white;
+}
+
+.btn-info:hover {
+    background-color: #0c4a6e;
+}
+
+.btn-warning {
+    border: 2px solid #b45309;
+    background-color: #b45309;
+    color: white;
+}
+
+.btn-warning:hover {
+    background-color: #78350f;
+}
+
+.btn-danger {
+    border: 2px solid #be123c;
+    background-color: #be123c;
+    color: white;
+}
+
+.btn-danger:hover {
+    background-color: #881337;
+}
+
+
+.game {
+    display: none;
     border-collapse: collapse;
 
-    tr > td {
+    tr>td {
         position: relative;
         width: min(20vw, 150px);
         height: min(20vw, 150px);
-        border-bottom: 1px solid black;
+        border-bottom: 1px solid #e2e8f0;
         box-sizing: border-box;
         cursor: pointer;
         text-align: center;
         vertical-align: middle;
     }
 
-    tr > td:has(span.marked) {
+    tr>td:has(span.marked) {
         cursor: initial;
     }
 
-    tr > td:first-child {
-        border-right: 1px solid black;
+    tr>td:first-child {
+        border-right: 1px solid #e2e8f0;
     }
-    tr > td:last-child {
-        border-left: 1px solid black;
+
+    tr>td:last-child {
+        border-left: 1px solid #e2e8f0;
     }
-    tr:last-child > td {
+
+    tr:last-child>td {
         border-bottom: 0px;
     }
 
-    
-    tr > td > span{
+
+    tr>td>span {
         width: 100%;
         font-size: 6rem;
         text-align: center;
     }
 
-    span.cross:before{
+    span.cross:before {
         transition: opacity 0.2s ease-in-out, scale 0.2s ease-in-out;
         transform-origin: center center;
         content: '';
@@ -57,7 +184,7 @@ body {
         left: 0px;
     }
 
-    span.cross:after{
+    span.cross:after {
         transition: opacity 0.2s ease-in-out, scale 0.2s ease-in-out;
         transform-origin: center center;
         content: '';
@@ -71,7 +198,7 @@ body {
         left: 0px;
     }
 
-    span.circle:before{
+    span.circle:before {
         box-sizing: border-box;
         transition: all 0.2s ease-in-out;
         transform-origin: center center;
@@ -87,17 +214,17 @@ body {
         left: 10%;
     }
 
-    span.cross.marked:before{
+    span.cross.marked:before {
         scale: 1;
         opacity: 1;
     }
 
-    span.cross.marked:after{
+    span.cross.marked:after {
         scale: 1;
         opacity: 1;
     }
 
-    span.circle.marked:before{
+    span.circle.marked:before {
         scale: 1;
         opacity: 1;
     }

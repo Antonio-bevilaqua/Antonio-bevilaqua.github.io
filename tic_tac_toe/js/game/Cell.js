@@ -22,6 +22,16 @@ class Cell {
         this.type = this.types[typeIdx];
     }
 
+    clear() {
+        this.span.classList.remove("marked");
+        if (!this.span.classList.contains("circle")) {
+            this.span.classList.add("circle");
+        }
+        if (!this.span.classList.contains("cross")) {
+            this.span.classList.add("cross");
+        }
+    }
+
     clone() {
         let newCell = new Cell(this.element);
         newCell.type = this.type;

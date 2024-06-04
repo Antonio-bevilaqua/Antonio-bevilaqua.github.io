@@ -47,71 +47,114 @@ class Evaluator {
             return false;
         }
 
-        this.createVirtualGrid();
-        this.virtualGrid[i][j].type = this.type;
-
-        let score = this.evaluateScore(this.virtualGrid, this.type);
-
-        if (score >= Unity.winscore) {
-            this.possiblePositions.push({
-                score: Unity.winscore + 1,
-                i: i,
-                j: j
-            });
-            return;
-        }
-
-        for (let k = 1; k < this.steps; k++) {
-            try {
-                let enemyEvaluator = new Evaluator(this.virtualGrid, this.type, 1, true, "enemy");
-                let move = enemyEvaluator.evaluate();
-
-                if (enemyEvaluator.maxScore >= Unity.winscore) {
-                    this.possiblePositions.push({
-                        score: Unity.losescore,
-                        i: move.i,
-                        j: move.j
-                    });
-                    return;
-                }
-
-                this.virtualGrid = enemyEvaluator.getVirtualGrid();
-                let nextEvaluation = new Evaluator(this.virtualGrid, this.enemyType, 1, false);
-                nextEvaluation.evaluate();
-
-                if (nextEvaluation.maxScore >= Unity.winscore) {
-                    this.possiblePositions.push({
-                        score: Unity.winscore,
-                        i: i,
-                        j: j
-                    });
-                    return;
-                }
-                this.virtualGrid = nextEvaluation.getVirtualGrid();
-
-                if (k === this.steps - 1) {
-                    this.possiblePositions.push({
-                        score: nextEvaluation.maxScore,
-                        i: i,
-                        j: j
-                    });
-                }
-            } catch (e) {
-                this.possiblePositions.push({
-                    score: Unity.losescore,
-                    i: i,
-                    j: j
-                });
-                break;
-            }
-        }
-        if (this.steps <= 1) {
-            this.possiblePositions.push({
+        //dificuldade mínima, jogo é randomico
+        if (this.steps === 0) {
+            return this.possiblePositions.push({
                 score: 1,
                 i: i,
                 j: j
             });
         }
+
+        this.createVirtualGrid();
+        this.virtualGrid[i][j].type = this.type;
+
+        
+        let score = this.evaluateScore(this.virtualGrid, this.type);
+
+        if (score >= Unity.winscore) {
+            return this.possiblePositions.push({
+                score: Unity.winscore,
+                i: i,
+                j: j
+            });
+        }
+
+        if (this.steps > 1) {
+            score = this.evaluateSteps(score);
+        }
+
+        this.possiblePositions.push({
+            score: score,
+            i: i,
+            j: j
+        });
+    }
+
+    evaluateSteps(score) {
+        let nextEnemyMoveScore = this.evaluateNextEnemyMove();
+        if (nextEnemyMoveScore === null) {
+            return score;
+        }
+        if (nextEnemyMoveScore >= Unity.winscore) {
+            return Unity.losescore;
+        }
+        score -= nextEnemyMoveScore;
+
+        score = this.evaluateFutureSteps(score);
+
+        return score;
+    }
+
+    evaluateFutureSteps(actualScore) {
+        if (this.steps <= 1) {
+            return actualScore;
+        }
+
+        let weight = 2;
+        for (let k = 1; k < this.steps; k++) {
+            let nextMoveScore = this.evaluateNextMove();
+            if (nextMoveScore === null) {
+                break;
+            }
+            if (nextMoveScore >= Unity.winscore) {
+                return Unity.winscore / weight;
+            }
+            actualScore += nextMoveScore / weight;
+
+            let nextEnemyMoveScore = this.evaluateNextEnemyMove();
+            if (nextEnemyMoveScore === null) {
+                break;
+            }
+            if (nextEnemyMoveScore >= Unity.winscore) {
+                return Unity.losescore / weight;
+            }
+            actualScore -= nextEnemyMoveScore / weight;
+            weight++;
+        }
+
+        return actualScore;
+    }
+
+    evaluateNextMove() {
+        if (!this.isVirtualGridMoveAvailable()) {
+            return null;
+        }
+
+        let nextEvaluation = new Evaluator(this.virtualGrid, this.enemyType, 1, false);
+        nextEvaluation.evaluate();
+
+        if (nextEvaluation.maxScore >= Unity.winscore) {
+            return Unity.winscore;
+        }
+        this.virtualGrid = nextEvaluation.getVirtualGrid();
+
+        return nextEvaluation.maxScore;
+    }
+
+    evaluateNextEnemyMove() {
+        if (!this.isVirtualGridMoveAvailable()) {
+            return null;
+        }
+        let enemyEvaluator = new Evaluator(this.virtualGrid, this.type, 1, false);
+        enemyEvaluator.evaluate();
+
+        if (enemyEvaluator.maxScore >= Unity.winscore) {
+            return Unity.winscore;
+        }
+
+        this.virtualGrid = enemyEvaluator.getVirtualGrid();
+        return enemyEvaluator.maxScore;
     }
 
     createVirtualGrid() {
@@ -128,6 +171,18 @@ class Evaluator {
 
     getVirtualGrid() {
         return this.virtualGrid;
+    }
+
+    isVirtualGridMoveAvailable() {
+        for (let i = 0; i < this.virtualGrid.length; i++) {
+            for (let j = 0; j < this.virtualGrid.length; j++) {
+                if (this.virtualGrid[i][j].type === null) {
+                    return true;
+                }
+            }
+        }
+
+        return false;
     }
 
     evaluateScore(grid, type) {

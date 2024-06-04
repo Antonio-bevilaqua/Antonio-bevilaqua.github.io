@@ -4,8 +4,8 @@ class Unity {
         let typeIdx = possibleTypes.indexOf(type);
         this.type = typeIdx >= 0 ? possibleTypes[typeIdx] : possibleTypes[0];
         this.turnFinished = false;
-        Unity.winscore = 100000;
-        Unity.losescore = -100000;
+        Unity.winscore = 9999;
+        Unity.losescore = -9999;
     }
 
     update() {
