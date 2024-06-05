@@ -35,25 +35,26 @@ main {
 
     #result {
         position: fixed;
-        top: 15%;
+        top: 0%;
         width: min(90%, 600px);
         background-color: #1e293b;
         left: 50%;
         top: 0%;
-        transform: translate(-50%, -50%);
+        transform: translate(-50%, 0%);
         border-radius: 1rem;
         display: flex;
         flex-direction: column;
         justify-content: space-between;
         align-items: center;
-        gap: 2rem;
-        padding: 2rem;
+        gap: 1rem;
+        padding: 1rem;
         opacity: 0;
         pointer-events: none;
         transition: top 0.2s ease, opacity 0.2s ease;
+        z-index: 9999;
 
         &.show {
-            top: 50%;
+            top: 3%;
             opacity: 1;
             pointer-events: all;
         }
@@ -62,8 +63,8 @@ main {
             text-align: center;
 
             .icon {
-                font-size: 6rem;
-                margin-bottom: 1rem;
+                font-size: 4rem;
+                margin-bottom: 0rem;
             }
         }
 

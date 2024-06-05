@@ -1,4 +1,4 @@
-import Vector2 from "../../geometry/Vector2.js";
+import Vector2 from "../../geometry/Vector2.js?v=1.0.0";
 
 class VirtualGrid {
     constructor(baseGrid) {

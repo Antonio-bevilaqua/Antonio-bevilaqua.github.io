@@ -1,6 +1,6 @@
-import Game from "./Game.js";
-import Evaluator from "./IA/Evaluator.js";
-import Unity from "./Unity.js";
+import Game from "./Game.js?v=1.0.0";
+import Evaluator from "./IA/Evaluator.js?v=1.0.0";
+import Unity from "./Unity.js?v=1.0.0";
 
 class Enemy extends Unity {
     constructor(dificulty = 1, type = "circle") {

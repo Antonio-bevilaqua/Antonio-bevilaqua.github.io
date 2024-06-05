@@ -1,6 +1,6 @@
-import Vector2 from "../../geometry/Vector2.js";
-import Unity from "../Unity.js";
-import VirtualGrid from "./VirtualGrid.js";
+import Vector2 from "../../geometry/Vector2.js?v=1.0.0";
+import Unity from "../Unity.js?v=1.0.0";
+import VirtualGrid from "./VirtualGrid.js?v=1.0.0";
 
 class Evaluator {
     constructor(grid, enemyType = "cross", steps = 4) {

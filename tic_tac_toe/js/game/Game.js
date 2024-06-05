@@ -1,9 +1,7 @@
-import Cell from "./Cell.js";
-import Enemy from "./Enemy.js";
-import Evaluator from "./IA/Evaluator.js";
-import VirtualGrid from "./IA/VirtualGrid.js";
-import Player from "./Player.js";
-import Unity from "./Unity.js";
+import Cell from "./Cell.js?v=1.0.0";
+import Enemy from "./Enemy.js?v=1.0.0";
+import VirtualGrid from "./IA/VirtualGrid.js?v=1.0.0";
+import Player from "./Player.js?v=1.0.0";
 
 class Game {
     constructor(difficulty) {
@@ -40,12 +38,15 @@ class Game {
     }
 
     hidePlayAgain() {
-        console.log(this.result.classList);
+        Game.board.style.display = "none";
+        this.clearAll();
+        this.options.style.display = "flex";
         this.result.classList.remove('show');
     }
 
     update() {
         if (this.isFinished) {
+            console.log("finished");
             return;
         }
 
@@ -97,9 +98,7 @@ class Game {
         this.topResult.classList.add('success');
         this.result.classList.add('show');
         this.isFinished = true;
-        this.options.style.display = "flex";
-        Game.board.style.display = "none";
-        this.clearAll();
+        Game.actualTurn = null;
     }
 
     lost() {
@@ -108,9 +107,7 @@ class Game {
         this.topResult.classList.add('danger');
         this.result.classList.add('show');
         this.isFinished = true;
-        this.options.style.display = "flex";
-        Game.board.style.display = "none";
-        this.clearAll();
+        Game.actualTurn = null;
     }
 
     draw() {
@@ -119,9 +116,7 @@ class Game {
         this.topResult.classList.remove('danger');
         this.result.classList.add('show');
         this.isFinished = true;
-        this.options.style.display = "flex";
-        Game.board.style.display = "none";
-        this.clearAll();
+        Game.actualTurn = null;
     }
 
     clearAll() {

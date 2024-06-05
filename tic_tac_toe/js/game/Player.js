@@ -1,6 +1,5 @@
-import Game from "./Game.js";
-import Evaluator from "./IA/Evaluator.js";
-import Unity from "./Unity.js";
+import Game from "./Game.js?v=1.0.0";
+import Unity from "./Unity.js?v=1.0.0";
 
 class Player extends Unity {
     constructor(type = "cross") {
@@ -27,7 +26,7 @@ class Player extends Unity {
         evt.preventDefault();
         for (let i = 0; i < Game.grid.length; i++) {
             for (let j = 0; j < Game.grid[i].length; j++) {
-                if (Game.grid[i][j].element === evt.target) {
+                if (Game.grid[i][j].element === evt.target && Game.grid[i][j].type === null) {
                     this.markIj(i, j);
                     break;
                 }
