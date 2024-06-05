@@ -31,7 +31,7 @@ class Game {
 
         this.result.querySelector("button").addEventListener("click", this.hidePlayAgain.bind(this));
 
-        Game.actualTurn = this.player.type;//Math.floor((Math.random() * 100)) % 2 === 0 ? "cross" : "circle";
+        Game.actualTurn = Math.floor((Math.random() * 100)) % 2 === 0 ? "cross" : "circle";
 
         this.isFinished = false;
 
