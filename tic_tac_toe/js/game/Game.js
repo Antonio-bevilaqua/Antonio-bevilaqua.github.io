@@ -1,7 +1,7 @@
-import Cell from "./Cell.js?v=1.0.0";
-import Enemy from "./Enemy.js?v=1.0.0";
-import VirtualGrid from "./IA/VirtualGrid.js?v=1.0.0";
-import Player from "./Player.js?v=1.0.0";
+import Cell from "./Cell.js?v=2.0.0";
+import Enemy from "./Enemy.js?v=2.0.0";
+import VirtualGrid from "./IA/VirtualGrid.js?v=2.0.0";
+import Player from "./Player.js?v=2.0.0";
 
 class Game {
     constructor(difficulty) {

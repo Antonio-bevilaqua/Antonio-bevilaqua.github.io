@@ -1,5 +1,5 @@
-import Game from "./Game.js?v=1.0.0";
-import Unity from "./Unity.js?v=1.0.0";
+import Game from "./Game.js?v=2.0.0";
+import Unity from "./Unity.js?v=2.0.0";
 
 class Player extends Unity {
     constructor(type = "cross") {

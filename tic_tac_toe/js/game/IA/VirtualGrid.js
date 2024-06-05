@@ -1,4 +1,4 @@
-import Vector2 from "../../geometry/Vector2.js?v=1.0.0";
+import Vector2 from "../../geometry/Vector2.js?v=2.0.0";
 
 class VirtualGrid {
     constructor(baseGrid) {
@@ -50,7 +50,7 @@ class VirtualGrid {
             } else {
                 diagonal1Score++;
             }
-            if (diagonal1Score === 3) {
+            if (diagonal1Score >= 3 && diagonal1Type !== null) {
                 return diagonal1Type;
             }
 
@@ -61,31 +61,30 @@ class VirtualGrid {
             } else {
                 diagonal2Score++;
             }
-            if (diagonal2Score === 3) {
+            if (diagonal2Score >= 3 && diagonal2Type !== null) {
                 return diagonal2Type;
             }
 
             for (let j = 0; j < this.grid.length; j++) {
-                if (this.grid[j][i].type !== horizontalType) {
-                    horizontalType = this.grid[j][i].type;
+                if (this.grid[i][j].type !== horizontalType) {
+                    horizontalType = this.grid[i][j].type;
                     horizontalScore = 1;
                 } else {
                     horizontalScore++;
                 }
-
-                if (horizontalScore === 3) {
+    
+                if (horizontalScore >= 3 && horizontalType !== null) {
                     return horizontalType;
                 }
 
-
-                if (this.grid[i][j].type !== verticalType) {
-                    verticalType = this.grid[i][j].type;
+                if (this.grid[j][i].type !== verticalType) {
+                    verticalType = this.grid[j][i].type;
                     verticalScore = 1;
                 } else {
                     verticalScore++;
                 }
 
-                if (verticalScore === 3) {
+                if (verticalScore >= 3 && verticalType !== null) {
                     return verticalType;
                 }
             }
