@@ -1,6 +1,7 @@
 import Cell from "./Cell.js";
 import Enemy from "./Enemy.js";
 import Evaluator from "./IA/Evaluator.js";
+import VirtualGrid from "./IA/VirtualGrid.js";
 import Player from "./Player.js";
 import Unity from "./Unity.js";
 
@@ -30,7 +31,7 @@ class Game {
 
         this.result.querySelector("button").addEventListener("click", this.hidePlayAgain.bind(this));
 
-        Game.actualTurn = Math.floor((Math.random() * 100)) % 2 === 0 ? "cross" : "circle";
+        Game.actualTurn = this.player.type;//Math.floor((Math.random() * 100)) % 2 === 0 ? "cross" : "circle";
 
         this.isFinished = false;
 
@@ -48,11 +49,7 @@ class Game {
             return;
         }
 
-        if (this.checkPlayerWin()) {
-            return;
-        }
-
-        if (this.checkDraw()) {
+        if (this.checkGameFinished()) {
             return;
         }
 
@@ -63,23 +60,22 @@ class Game {
         }
     }
 
-    checkDraw() {
-        for (let i = 0; i < Game.grid.length; i++) {
-            for (let j = 0; j < Game.grid.length; j++) {
-                if (Game.grid[i][j].type === null) {
-                    return false;
-                }
-            }
+    checkGameFinished() {
+        let virtualGrid = new VirtualGrid(Game.grid);
+
+        let winner = virtualGrid.winner();
+        if (winner === this.player.type) {
+            this.won();
+            return true;
         }
 
-        this.draw();
-        return true;
-    }
+        if (winner === this.enemy.type) {
+            this.lost();
+            return true;
+        }
 
-    checkPlayerWin() {
-        let evaluator = new Evaluator(Game.grid, this.player.type, 1);
-        if (evaluator.evaluateScore(Game.grid, this.player.type) >= Unity.winscore) {
-            this.won();
+        if (!virtualGrid.hasMoveAvailable()) {
+            this.draw();
             return true;
         }
 
@@ -88,17 +84,10 @@ class Game {
 
     updatePlayer() {
         this.player.update();
-        if (this.player.hasWon) {
-            return this.won();
-        }
     }
 
     updateEnemy() {
         this.enemy.update();
-        let evaluator = new Evaluator(Game.grid, this.enemy.type, 1);
-        if (evaluator.evaluateScore(Game.grid, this.enemy.type) >= Unity.winscore) {
-            return this.lost();
-        }
         Game.actualTurn = this.player.type;
     }
 

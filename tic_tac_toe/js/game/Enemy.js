@@ -17,8 +17,8 @@ class Enemy extends Unity {
     evaluateMove() {
         let evaluator = new Evaluator(Game.grid, this.type === "circle" ? "cross" : "circle", this.dificulty);
         let move = evaluator.evaluate();
-        
-        Game.grid[move.i][move.j].mark(this.type);
+
+        Game.grid[move.X][move.Y].mark(this.type);
         this.isPlaying = false;
         this.turnFinished = true;
     }
