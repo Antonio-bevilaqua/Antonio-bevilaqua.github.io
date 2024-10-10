@@ -1,0 +1,32 @@
+form {
+  display: grid;
+  gap: 1rem;
+}
+
+input {
+  width: 250px;
+  box-sizing: border-box;
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  border: 1px solid #afafaf;
+}
+
+button {
+  width: 250px;
+  box-sizing: border-box;
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  cursor: pointer;
+}
+
+.input-data label {
+  display: block;
+}
+
+.has-errors {
+  border-color: red;
+}
+
+.error-label {
+  color: red;
+}

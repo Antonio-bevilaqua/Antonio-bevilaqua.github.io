@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Validador JS</title>
+    <link rel="stylesheet" type="text/css" href="./style.css" />
+  </head>
+  <body>
+    <form withValidations novalidate class="form-container">
+      <div class="input-data">
+        <label>Nome:</label>
+        <input name="nome" required />
+      </div>
+      <div class="input-data">
+        <label>Email:</label>
+        <input name="email" email />
+      </div>
+      <div class="input-data">
+        <label>Valor:</label>
+        <input type="number" name="valor" min="3" />
+      </div>
+      <button type="submit">SUBMIT</button>
+    </form>
+    <script type="module" src="./validator.js"></script>
+  </body>
+</html>
