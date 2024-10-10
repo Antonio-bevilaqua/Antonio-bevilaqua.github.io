@@ -17,7 +17,7 @@ export const validations = {
     onError: `O valor mínimo para este campo é ${val}`,
   }),
   max: (val) => ({
-    isValid: (value) => value >= val,
+    isValid: (value) => value <= val,
     onError: `O valor máximo para este campo é ${val}`,
   }),
 };
